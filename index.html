@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de Presse - Excellence Média Numérique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .press-card {
+            width: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .press-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .card-header {
+            background: 
+                linear-gradient(135deg, rgba(26, 42, 108, 0.8), rgba(58, 31, 178, 0.8), rgba(13, 15, 105, 0.8));
+            padding: 25px 20px;
+            text-align: ;
+            color: white;
+            
+            overflow: hidden;
+            cursor: pointer;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .press-card:hover .card-header::before {
+            transform: translateX(100%);
+        }
+        
+        .card-header h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .card-header p {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .photo-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .photo-container {
+            width: 100px;
+            height: 120px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            border: 2px solid #e9ecef;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-container:hover {
+            transform: scale(1.03);
+        }
+        
+        .personal-info {
+            flex: 1;
+        }
+        
+        .name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #212529;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .name:hover {
+            transform: translateX(5px);
+        }
+        
+        .function {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .function:hover {
+            color: #1a2a6c;
+        }
+        
+        .info-section {
+            margin-bottom: 18px;
+            padding-left: 10px;
+            border-left: 3px solid #fdbb2d;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .info-section:hover {
+            border-left-color: #1a2a6c;
+            transform: translateX(5px);
+        }
+        
+        .info-label {
+            font-size: 11px;
+            color: #6c757d;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .info-value {
+            font-size: 14px;
+            color: #212529;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .info-value:hover {
+            color: #1a2a6c;
+        }
+        
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        
+        .contact-item {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #e9ecef;
+        }
+        
+        .contact-item:hover {
+            background: #e9ecef;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #1a2a6c;
+        }
+        
+        .contact-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .social-section {
+            margin-top: 25px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .youtube { background: #FF0000; }
+        .facebook { background: #3b5998; }
+        .twitter { background: #1DA1F2; }
+        .tiktok { background: #000000; }
+        .instagram { 
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+        
+        .app-download {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .app-download:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        
+        .app-download a {
+            color: #1a2a6c;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .app-download:hover a {
+            color: #b21f1f;
+        }
+        
+        .card-footer {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 10px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: bold;
+            color: #1a2a6c;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .logo:hover {
+            color: #b21f1f;
+        }
+        
+        .location-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+        
+        .location-section:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .location-icon {
+            color: #1a2a6c;
+            font-size: 16px;
+        }
+        
+        .location-text {
+            font-size: 10px;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #fdbb2d;
+            color: white;
+            padding: 5px 35px;
+            transform: rotate(45deg);
+            font-size: 10px;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .badge:hover {
+            background: #e6a920;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+            font-weight: 500;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal h2 {
+            margin-bottom: 15px;
+            color: #1a2a6c;
+        }
+        
+        .modal p {
+            margin-bottom: 20px;
+            color: #495057;
+        }
+        
+        .modal-close {
+            background: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #b21f1f;
+        }
+        
+        .contacts-container {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .map-modal-content {
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            color: #1a2a6c;
+            border: 2px dashed #90caf9;
+        }
+        
+        .map-placeholder i {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .location-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .location-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .location-btn.primary {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .location-btn.secondary {
+            background: #fdbb2d;
+            color: white;
+        }
+        
+        .location-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Styles pour la photo intégrée */
+        .photo-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .photo-preview {
+            width: 150px;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .photo-option {
+            width: 70px;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .photo-option:hover {
+            transform: scale(1.05);
+            border-color: #1a2a6c;
+        }
+        
+        .photo-option.selected {
+            border-color: #fdbb2d;
+            box-shadow: 0 0 0 2px #fdbb2d;
+        }
+        
+        .photo-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn.primary {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .action-btn.secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Nouveau style pour le bouton de contact */
+        .contact-button {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(26, 42, 108, 0.3);
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(26, 42, 108, 0.4);
+            background: linear-gradient(135deg, #b21f1f, #1a2a6c);
+        }
+        
+        .contact-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .contact-button i {
+            font-size: 18px;
+        }
+        
+        /* Styles pour le menu de contact */
+        .contact-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            z-index: 3000;
+            text-align: center;
+            min-width: 280px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .contact-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2999;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .contact-option {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-option.call {
+            background: #4CAF50;
+        }
+        
+        .contact-option.email {
+            background: #2196F3;
+        }
+        
+        .contact-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .close-contact-menu {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .close-contact-menu:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="press-card">
+        <div class="badge" id="badge">ACTIF</div>
+        <div class="card-header" id="cardHeader">
+             <img id="currentPhoto" src="Logo.png" alt="Photo du journaliste">
+            <h4>AUTHENTICATION DE LA CARTE DE PRESSE</h4>
+            <p>Le service des Ressources Humaines d'Excellence Média Numerique certifie que le titulaire du present document est reconnu comme agent officiel de son média. </p>
+        </div>
+        
+        <div class="card-body">
+            <div class="photo-section">
+                <div class="photo-container" id="photoContainer">
+                    <!-- Photo intégrée directement dans le HTML -->
+                    <img id="currentPhoto" src="Profil.jpg" alt="Photo du journaliste">
+                </div>
+                <div class="personal-info">
+                    <div class="name" id="journalistName">Luxiel OLEBOU</div>
+                    <div class="function" id="journalistFunction">Operateur de vue (O.P.V)</div>
+                </div>
+            </div>
+            
+            <div class="info-section" id="addressSection">
+                <div class="info-label">ADRESSE DU MÉDIA</div>
+                <div class="info-value">61 Avenue des trois Martyrs, Ouénzé Brazzaville, Ref: Rond point KOULOUNDA</div>
+            </div>
+            
+            <div class="info-section" id="websiteSection">
+                <div class="info-label">SITE INTERNET</div>
+                <div class="info-value">www.excellencemedianumerique.com</div>
+            </div>
+            
+            <div class="social-section">
+                <div class="info-label">SUIVEZ-NOUS SUR</div>
+                <div class="social-icons">
+                    <a href="https://youtube.com/@excellencemedianumerique" class="social-icon youtube" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61576697857842" class="social-icon facebook" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://x.com/MediaNumer55618" class="social-icon twitter" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@excellencemedianumerique?is_from_webapp=1&sender_device=pc" class="social-icon tiktok" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://www.instagram.com/excellencemedianumerique?igsh=MXdycXVpanpkeHlybA%3D%3D&utm_source=qr" class="social-icon instagram" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Nouveau bouton de contact -->
+            <button class="contact-button" id="contactButton">
+                <i class="fas fa-phone-alt"></i>
+                Nous Contacter
+            </button>
+            
+            <div class="app-download" id="appDownload">
+                <a href="https://www.mediafire.com/file/ixefssl92bz3zfa/EMNtv_v1_1.0.apk/file" target="_blank">
+                    <i class="fab fa-android"></i>
+                    Téléchargez notre application Android
+                </a>
+            </div>
+        </div>
+        
+        <div class="card-footer">
+            <div class="location-section" id="locationSection">
+                <div class="location-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="location-text">
+                    Voir notre localisation
+                </div>
+            </div>
+            <div>
+                <div>situation géographique de la chaine</div>
+                <div class="logo" id="logo">EXCELLENCE MÉDIA NUMÉRIQUE</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        Action effectuée avec succès!
+    </div>
+
+   
+
+   
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <h2 id="contactModalTitle">Contact</h2>
+            <p id="contactModalText">Informations de contact</p>
+            <button class="modal-close" id="contactModalClose">Fermer</button>
+        </div>
+    </div>
+
+    <div class="modal" id="locationModal">
+        <div class="modal-content map-modal-content">
+            <h2>Notre Localisation</h2>
+            <p>61 Avenue des trois Martyrs, Ouénzé Brazzaville, Ref: Rond point KOULOUNDA</p>
+            
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt"></i>
+                <div>Carte Interactive</div>
+                <small>Excellence Média Numérique</small>
+            </div>
+            
+            <div class="location-actions">
+                <button class="location-btn primary" id="openMaps">
+                    <i class="fas fa-external-link-alt"></i>
+                    Ouvrir dans Google Maps
+                </button>
+                <button class="location-btn secondary" id="getDirections">
+                    <i class="fas fa-route"></i>
+                    Itinéraire
+                </button>
+            </div>
+            
+            <button class="modal-close" id="locationModalClose" style="margin-top: 15px;">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        // Éléments interactifs
+        const badge = document.getElementById('badge');
+        const cardHeader = document.getElementById('cardHeader');
+        const photoContainer = document.getElementById('photoContainer');
+        const currentPhoto = document.getElementById('currentPhoto');
+        const journalistName = document.getElementById('journalistName');
+        const journalistFunction = document.getElementById('journalistFunction');
+        const addressSection = document.getElementById('addressSection');
+        const websiteSection = document.getElementById('websiteSection');
+        const appDownload = document.getElementById('appDownload');
+        const locationSection = document.getElementById('locationSection');
+        const logo = document.getElementById('logo');
+        const notification = document.getElementById('notification');
+        const contactModal = document.getElementById('contactModal');
+        const locationModal = document.getElementById('locationModal');
+        const contactModalClose = document.getElementById('contactModalClose');
+        const locationModalClose = document.getElementById('locationModalClose');
+        const openMaps = document.getElementById('openMaps');
+        const getDirections = document.getElementById('getDirections');
+        const contactButton = document.getElementById('contactButton');
+
+        // Fonction pour afficher les notifications
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Fonction pour appeler le numéro
+        function callNumber() {
+            window.location.href = 'tel:+242065042588';
+            showNotification('Appel en cours vers +242 06 504 25 88');
+        }
+
+        // Fonction pour envoyer un email
+        function sendEmail() {
+            window.location.href = 'mailto:excellencemedianumerique@gmail.com';
+            showNotification('Ouverture de votre client email');
+        }
+
+        // Fonction pour afficher le menu de contact
+        function showContactMenu() {
+            // Créer l'overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'contact-menu-overlay';
+            overlay.id = 'contactMenuOverlay';
+            
+            // Créer le menu de contact
+            const contactMenu = document.createElement('div');
+            contactMenu.className = 'contact-menu';
+            contactMenu.innerHTML = `
+                <h3 style="margin-bottom: 15px; color: #1a2a6c;">Nous Contacter</h3>
+                <button class="contact-option call" id="callOption">
+                    <i class="fas fa-phone"></i>
+                    Appeler +242 06 504 25 88
+                </button>
+                <button class="contact-option email" id="emailOption">
+                    <i class="fas fa-envelope"></i>
+                    Envoyer un Email
+                </button>
+                <button class="close-contact-menu" id="closeContactMenu">
+                    Fermer
+                </button>
+            `;
+            
+            // Ajouter au body
+            document.body.appendChild(overlay);
+            document.body.appendChild(contactMenu);
+            
+            // Ajouter les événements
+            document.getElementById('callOption').addEventListener('click', callNumber);
+            document.getElementById('emailOption').addEventListener('click', sendEmail);
+            document.getElementById('closeContactMenu').addEventListener('click', closeContactMenu);
+            overlay.addEventListener('click', closeContactMenu);
+        }
+
+        // Fonction pour fermer le menu de contact
+        function closeContactMenu() {
+            const overlay = document.getElementById('contactMenuOverlay');
+            const contactMenu = document.querySelector('.contact-menu');
+            
+            if (overlay) {
+                document.body.removeChild(overlay);
+            }
+            if (contactMenu) {
+                document.body.removeChild(contactMenu);
+            }
+        }
+
+        // Interactions
+        badge.addEventListener('click', () => {
+            showNotification('Statut de la carte vérifié');
+        });
+
+        cardHeader.addEventListener('click', () => {
+            showNotification('En-tête de la carte de presse');
+        });
+
+        photoContainer.addEventListener('click', () => {
+            showNotification('Photo du PDG');
+        });
+
+        journalistName.addEventListener('click', () => {
+            showNotification('Prévu TSIRO - PDG');
+        });
+
+        journalistFunction.addEventListener('click', () => {
+            showNotification('Fonction: Président Directeur Général / Rédacteur en Chef');
+        });
+
+        addressSection.addEventListener('click', () => {
+            window.open('https://maps.google.com/?q=61+Avenue+des+trois+Martyrs,+Ouénzé+Brazzaville,+Congo', '_blank');
+            showNotification('Adresse ouverte dans Google Maps');
+        });
+
+        websiteSection.addEventListener('click', () => {
+            window.open('https://excellence-media-ecc11.web.app', '_blank');
+            showNotification('Site web ouvert dans un nouvel onglet');
+        });
+
+        locationSection.addEventListener('click', () => {
+            locationModal.classList.add('show');
+            showNotification('Localisation affichée');
+        });
+
+        openMaps.addEventListener('click', () => {
+            window.open('https://maps.google.com/?q=61+Avenue+des+trois+Martyrs,+Ouénzé+Brazzaville,+Congo', '_blank');
+            showNotification('Google Maps ouvert');
+        });
+
+        getDirections.addEventListener('click', () => {
+            window.open('https://maps.google.com/?q=61+Avenue+des+trois+Martyrs,+Ouénzé+Brazzaville,+Congo&dirflg=d', '_blank');
+            showNotification('Itinéraire calculé');
+        });
+
+        logo.addEventListener('click', () => {
+            showNotification('Excellence Média Numérique - Tous droits réservés');
+        });
+
+        // Nouveau bouton de contact
+        contactButton.addEventListener('click', showContactMenu);
+
+        // Fermeture des modales
+        contactModalClose.addEventListener('click', () => {
+            contactModal.classList.remove('show');
+        });
+
+        locationModalClose.addEventListener('click', () => {
+            locationModal.classList.remove('show');
+        });
+
+        // Fermer les modales en cliquant en dehors
+        window.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('show');
+            }
+            if (e.target === locationModal) {
+                locationModal.classList.remove('show');
+            }
+        });
+
+        // Animation supplémentaire au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.press-card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
